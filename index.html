@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wadols Link Tree</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(-45deg, #ff6b9d, #ffa0b4, #ffb6c1, #ffc0cb, #ff91a4);
+            background-size: 300% 300%;
+            animation: gradientMove 6s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .sparkle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 6px white;
+        }
+
+        @keyframes float1 {
+            0% { top: 100vh; opacity: 0; transform: translateX(0px) rotate(0deg); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: -20px; opacity: 0; transform: translateX(20px) rotate(180deg); }
+        }
+
+        @keyframes float2 {
+            0% { top: 100vh; opacity: 0; transform: translateX(0px) rotate(0deg); }
+            15% { opacity: 1; }
+            85% { opacity: 1; }
+            100% { top: -20px; opacity: 0; transform: translateX(-15px) rotate(-180deg); }
+        }
+
+        @keyframes float3 {
+            0% { top: 100vh; opacity: 0; transform: translateX(0px) rotate(0deg); }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { top: -20px; opacity: 0; transform: translateX(10px) rotate(360deg); }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 4px solid rgba(255, 255, 255, 0.4);
+            object-fit: cover;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7), 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-name { font-size: 28px; font-weight: bold; color: white; margin-bottom: 10px; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 1px 1px 3px rgba(0, 0, 0, 0.6); }
+        .profile-bio { font-size: 16px; color: rgba(255, 255, 255, 0.95); margin-bottom: 30px; line-height: 1.5; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 1px 1px 2px rgba(0, 0, 0, 0.5); }
+
+        .link-button {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .link-button:hover { background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.25) 100%); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); border-color: rgba(255, 255, 255, 0.5); }
+        .link-button:active { transform: translateY(-1px); }
+        .link-icon { width: 24px; height: 24px; margin-right: 12px; filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5)); }
+
+        .instagram-gradient { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important; }
+        .facebook-color { background: #1877f2 !important; }
+
+        @media (max-width: 480px) {
+            .container { padding: 30px 20px; margin: 10px; }
+            .profile-name { font-size: 24px; }
+            .link-button { font-size: 14px; padding: 12px 16px; }
+            .link-icon { width: 20px; height: 20px; margin-right: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkles">
+        <!-- Lots of sparkles -->
+        <script>
+            for (let i = 0; i < 50; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.width = Math.floor(Math.random() * 5 + 2) + 'px';
+                sparkle.style.height = sparkle.style.width;
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.animation = `float${(i % 3) + 1} ${4 + Math.random() * 4}s infinite linear`;
+                sparkle.style.animationDelay = -Math.random() * 5 + 's';
+                document.currentScript.parentElement.appendChild(sparkle);
+            }
+        </script>
+    </div>
+
+    <div class="container">
+        <div class="profile-image">👤</div>
+        <h1 class="profile-name">Wadols</h1>
+        <p class="profile-bio">Hi Panget.</p>
+
+        <a href="https://instagram.com/yourusername" class="link-button instagram-gradient" target="_blank">
+            <svg class="link-icon" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07..."/>
+            </svg>
+            Instagram
+        </a>
+
+        <a href="https://facebook.com/yourusername" class="link-button facebook-color" target="_blank">
+            <svg class="link-icon" viewBox="0 0 24 24" fill="white">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12..."/>
+            </svg>
+            Facebook
+        </a>
+    </div>
+</body>
+</html>
